@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Травматолог-ортопед</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+    background: #f7f9fc;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.hero {
+    text-align: center;
+    padding-top: 120px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="#about">Обо мне</a>
+<a href="#services">Услуги</a>
+<a href="#reviews">Отзывы</a>
+<a href="#faq">FAQ</a>
+<a href="#contacts">Контакты</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Дуйсембаев Алимжан Мустаевич</h1>
+<p>Травматолог-ортопед высшей категории</p>
+<button onclick="scrollToSection('contacts')">Записаться</button>
+</section>
+
+<section id="about">
+<h2>Обо мне</h2>
+<div class="card">
+<p>Опыт более 10 лет. Лечение травм и заболеваний опорно-двигательного аппарата.</p>
+</div>
+</section>
+
+<section id="services">
+<h2>Услуги</h2>
+<div class="card">Консультация</div>
+<div class="card">Лечение травм</div>
+<div class="card">Операции</div>
+</section>
+
+<section id="reviews">
+<h2>Отзывы</h2>
+<div class="card">Очень хороший врач!</div>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<div class="card">Нужна ли запись? — Да</div>
+</section>
+
+<section id="contacts">
+<h2>Контакты</h2>
+
+<div class="card">
+<p><b>Телефон / WhatsApp:</b></p>
+<p style="font-size:20px;">+7 (776) 117-88-81</p>
+
+<button onclick="window.location.href='https://wa.me/77761178881'">
+Написать в WhatsApp
+</button>
+</div>
+
+</section>
+
+<footer>
+© 2026 Дуйсембаев А.М.
+</footer>
+
+<script>
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+</script>
+
+</body>
+</html>
