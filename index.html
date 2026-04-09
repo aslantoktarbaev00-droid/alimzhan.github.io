@@ -3,150 +3,1027 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Травматолог-ортопед</title>
-
+<title>Дуйсембаев Алимжан — Травматолог-ортопед</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    scroll-behavior: smooth;
-    background: #f7f9fc;
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+:root {
+  --bg: #f8f6f2;
+  --bg2: #ffffff;
+  --navy: #1a2942;
+  --navy2: #243656;
+  --gold: #b8924a;
+  --gold2: #d4aa6a;
+  --text: #2c3e50;
+  --muted: #6b7a8d;
+  --light: #e8e2d8;
+  --white: #ffffff;
 }
 
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
 
+/* ── NAV ── */
 nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:rgba(26,41,66,0.97);
+  backdrop-filter:blur(12px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px; height:64px;
+  border-bottom:1px solid rgba(184,146,74,0.2);
+}
+.nav-logo {
+  font-family:'Playfair Display',serif;
+  color:var(--gold2); font-size:1rem; letter-spacing:0.3px;
+}
+.nav-tabs { display:flex; gap:0; height:64px; }
+.nav-tab {
+  height:64px; padding:0 20px;
+  background:none; border:none; border-bottom:2px solid transparent;
+  color:rgba(255,255,255,0.6); font-family:'Inter',sans-serif;
+  font-size:0.8rem; font-weight:500; letter-spacing:0.3px;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.nav-tab:hover { color:var(--gold2); border-bottom-color:rgba(184,146,74,0.4); }
+.nav-tab.active { color:var(--gold2); border-bottom-color:var(--gold); }
+.nav-cta {
+  background:var(--gold); color:var(--navy);
+  border:none; padding:9px 22px; border-radius:4px;
+  font-size:0.8rem; font-weight:600; cursor:pointer;
+  transition:all 0.2s; white-space:nowrap;
+}
+.nav-cta:hover { background:var(--gold2); }
+
+/* BURGER */
+.burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.burger span { width:22px; height:2px; background:rgba(255,255,255,0.7); border-radius:2px; transition:all 0.3s; }
+
+/* MOBILE DRAWER */
+.drawer {
+  display:none;
+  position:fixed; top:64px; left:0; right:0; z-index:199;
+  background:rgba(26,41,66,0.99);
+  flex-direction:column;
+  border-bottom:1px solid rgba(184,146,74,0.2);
+}
+.drawer.open { display:flex; }
+.drawer-tab {
+  padding:16px 28px; background:none; border:none;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.75); font-family:'Inter',sans-serif;
+  font-size:0.88rem; font-weight:500; text-align:left; cursor:pointer;
+  transition:background 0.15s;
+}
+.drawer-tab:hover { background:rgba(184,146,74,0.1); color:var(--gold2); }
+.drawer-tab.active { color:var(--gold); }
+.drawer-cta {
+  margin:16px 24px 20px;
+  padding:14px; background:var(--gold); color:var(--navy);
+  border:none; border-radius:4px; font-family:'Inter',sans-serif;
+  font-size:0.88rem; font-weight:600; cursor:pointer;
 }
 
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+/* ── CONTENT SECTIONS ── */
+.page { padding-top:64px; }
+.tab-section { display:none; }
+.tab-section.active { display:block; }
+
+/* ── HERO (HOME) ── */
+#sec-home {
+  min-height:calc(100vh - 64px);
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 50%, #1e3a5f 100%);
+  display:grid; grid-template-columns:1fr 1fr;
+  align-items:center; padding:80px 72px 80px 72px;
+  position:relative; overflow:hidden;
+}
+#sec-home::before {
+  content:''; position:absolute;
+  width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(184,146,74,0.08) 0%, transparent 70%);
+  right:-100px; top:-100px; pointer-events:none;
 }
 
-nav a:hover {
-    color: #007bff;
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(184,146,74,0.15); border:1px solid rgba(184,146,74,0.3);
+  color:var(--gold2); font-size:0.72rem; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:7px 14px; border-radius:20px; margin-bottom:28px;
+}
+.hero-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+.hero-name {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,3.5vw,3.4rem);
+  font-weight:700; color:#fff;
+  line-height:1.15; margin-bottom:10px;
+}
+.hero-name span { color:var(--gold2); }
+.hero-spec { font-size:1rem; color:rgba(255,255,255,0.6); font-weight:400; margin-bottom:24px; }
+
+.hero-desc {
+  font-size:0.93rem; color:rgba(255,255,255,0.75);
+  line-height:1.85; max-width:460px; margin-bottom:40px;
 }
 
-section {
-    padding: 100px 20px;
-    max-width: 1000px;
-    margin: auto;
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+.btn-gold {
+  background:var(--gold); color:var(--navy);
+  padding:13px 28px; border:none; border-radius:4px;
+  font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.2s;
+  text-decoration:none; display:inline-block;
+}
+.btn-gold:hover { background:var(--gold2); transform:translateY(-1px); box-shadow:0 6px 20px rgba(184,146,74,0.35); }
+.btn-ghost {
+  background:transparent; color:rgba(255,255,255,0.8);
+  padding:13px 28px; border:1px solid rgba(255,255,255,0.25);
+  border-radius:4px; font-size:0.85rem; font-weight:500;
+  cursor:pointer; transition:all 0.2s; text-decoration:none; display:inline-block;
+}
+.btn-ghost:hover { border-color:var(--gold2); color:var(--gold2); }
+
+.hero-stats {
+  display:flex; gap:48px; margin-top:52px;
+  padding-top:40px; border-top:1px solid rgba(184,146,74,0.2);
+}
+.stat-n {
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem; color:var(--gold2); font-weight:700; display:block; line-height:1;
+}
+.stat-l { font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:5px; display:block; }
+
+.hero-card {
+  display:flex; justify-content:center; align-items:center;
+}
+.hero-card-inner {
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(184,146,74,0.2);
+  border-radius:16px; padding:48px 40px;
+  text-align:center; backdrop-filter:blur(8px);
+  width:100%; max-width:320px;
+}
+.hc-avatar {
+  width:100px; height:100px; border-radius:50%;
+  background:rgba(184,146,74,0.12);
+  border:2px solid rgba(184,146,74,0.35);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.8rem; margin:0 auto 20px;
+}
+.hc-name { font-family:'Playfair Display',serif; color:#fff; font-size:1.1rem; margin-bottom:4px; }
+.hc-role { font-size:0.78rem; color:var(--gold2); margin-bottom:24px; letter-spacing:0.3px; }
+.hc-tags { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.hc-tag {
+  font-size:0.72rem; background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.65); padding:4px 10px; border-radius:20px;
 }
 
-.hero {
-    text-align: center;
-    padding-top: 120px;
+/* ── SECTION COMMON ── */
+.sec { padding:80px 72px; }
+.sec-alt { background:var(--bg2); }
+
+.sec-label {
+  font-size:0.7rem; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gold);
+  display:flex; align-items:center; gap:10px; margin-bottom:14px;
+}
+.sec-label::before { content:''; width:28px; height:1.5px; background:var(--gold); }
+
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,2.5vw,2.4rem); font-weight:700;
+  color:var(--navy); line-height:1.2; margin-bottom:14px;
+}
+.sec-sub {
+  font-size:0.93rem; color:var(--muted); line-height:1.8;
+  max-width:540px; margin-bottom:52px;
 }
 
-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+/* ── ABOUT ── */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+.about-text p { font-size:0.93rem; color:var(--text); line-height:1.9; margin-bottom:16px; opacity:0.9; }
+.about-quote {
+  border-left:3px solid var(--gold); padding:16px 20px;
+  margin:28px 0; background:rgba(184,146,74,0.05); border-radius:0 8px 8px 0;
 }
+.about-quote p { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--navy); font-style:italic; line-height:1.6; margin:0; opacity:1; }
 
-button:hover {
-    background: #0056b3;
+.achieve-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.achieve-card {
+  background:var(--bg); border:1px solid var(--light);
+  border-radius:10px; padding:22px 20px; transition:all 0.25s;
 }
+.achieve-card:hover { border-color:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+.achieve-icon { font-size:1.6rem; margin-bottom:10px; }
+.achieve-title { font-size:0.83rem; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.achieve-desc { font-size:0.78rem; color:var(--muted); line-height:1.6; }
 
-.card {
-    background: white;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+/* ── SERVICES ── */
+.svc-list { display:flex; flex-direction:column; gap:10px; margin-bottom:40px; }
+.svc-row {
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg2); border:1px solid var(--light);
+  border-radius:10px; padding:20px 24px; gap:16px;
+  cursor:pointer; transition:all 0.22s;
 }
+.svc-row:hover { border-color:var(--gold2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.07); }
+.svc-l { display:flex; align-items:center; gap:18px; }
+.svc-ico { font-size:1.7rem; flex-shrink:0; }
+.svc-name { font-size:0.95rem; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.svc-chips { display:flex; flex-wrap:wrap; gap:5px; }
+.svc-chip {
+  font-size:0.7rem; color:var(--muted);
+  background:rgba(107,122,141,0.08);
+  border:1px solid rgba(107,122,141,0.15);
+  padding:2px 9px; border-radius:20px;
+}
+.svc-r { display:flex; align-items:center; gap:16px; flex-shrink:0; }
+.svc-price { font-size:0.95rem; font-weight:600; color:var(--gold); white-space:nowrap; }
+.svc-arr { color:var(--gold); font-size:1rem; transition:transform 0.2s; }
+.svc-row:hover .svc-arr { transform:translateX(4px); }
 
+.why-box {
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  border-radius:12px; padding:36px 40px;
+}
+.why-box-title { font-family:'Playfair Display',serif; color:#fff; font-size:1.15rem; margin-bottom:20px; }
+.why-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 36px; }
+.why-item { font-size:0.87rem; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:10px; }
+.why-item::before { content:'✓'; color:var(--gold2); font-weight:700; flex-shrink:0; }
+
+/* ── MODAL ── */
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:500; backdrop-filter:blur(3px); }
+.overlay.on { display:block; }
+.modal {
+  display:none; position:fixed;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  z-index:501; background:var(--bg2);
+  border-radius:14px; padding:44px 40px 36px;
+  width:92%; max-width:440px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.2);
+  animation:mIn 0.28s ease;
+}
+.modal.on { display:block; }
+@keyframes mIn { from{opacity:0;transform:translate(-50%,-46%)} to{opacity:1;transform:translate(-50%,-50%)} }
+.m-close {
+  position:absolute; top:14px; right:16px;
+  background:none; border:none; font-size:1.1rem;
+  color:var(--muted); cursor:pointer; padding:4px 8px; line-height:1;
+}
+.m-close:hover { color:var(--text); }
+.m-icon { font-size:2.4rem; margin-bottom:12px; }
+.m-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--navy); margin-bottom:4px; }
+.m-price { font-size:1.15rem; color:var(--gold); font-weight:600; margin-bottom:20px; }
+.m-feats { list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:24px; padding-bottom:22px; border-bottom:1px solid var(--light); }
+.m-feats li { font-size:0.88rem; color:var(--text); display:flex; align-items:flex-start; gap:10px; }
+.m-feats li::before { content:'✔'; color:var(--gold); font-size:0.75rem; margin-top:2px; flex-shrink:0; }
+.m-wa {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; padding:14px;
+  background:#25d366; color:#fff;
+  border:none; border-radius:6px; font-family:'Inter',sans-serif;
+  font-size:0.88rem; font-weight:600; cursor:pointer;
+  text-decoration:none; transition:all 0.2s;
+}
+.m-wa:hover { background:#1db954; transform:translateY(-1px); box-shadow:0 6px 18px rgba(37,211,102,0.35); }
+
+/* ── HOW ── */
+.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; position:relative; }
+.steps::before {
+  content:''; position:absolute;
+  top:32px; left:calc(12.5% + 16px); right:calc(12.5% + 16px);
+  height:1px; background:linear-gradient(to right, transparent, var(--light), var(--light), transparent);
+}
+.step { text-align:center; padding:16px 20px; position:relative; z-index:1; }
+.step-n {
+  width:56px; height:56px; border-radius:50%;
+  background:var(--bg2); border:2px solid var(--light);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:1.1rem;
+  color:var(--gold); font-weight:700; margin:0 auto 20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+.step-title { font-size:0.92rem; font-weight:600; color:var(--navy); margin-bottom:8px; }
+.step-desc { font-size:0.81rem; color:var(--muted); line-height:1.7; }
+
+/* ── REVIEWS ── */
+.rev-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.rev-card {
+  background:var(--bg2); border:1px solid var(--light);
+  border-radius:12px; padding:28px; transition:all 0.25s;
+}
+.rev-card:hover { border-color:var(--gold2); box-shadow:0 8px 24px rgba(0,0,0,0.07); }
+.rev-stars { color:var(--gold); font-size:0.88rem; letter-spacing:2px; margin-bottom:16px; }
+.rev-text { font-size:0.87rem; color:var(--text); line-height:1.8; font-style:italic; margin-bottom:22px; opacity:0.9; }
+.rev-author { display:flex; align-items:center; gap:12px; }
+.rev-av {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; color:var(--gold2); font-size:1rem; font-weight:700;
+}
+.rev-name { font-size:0.85rem; font-weight:600; color:var(--navy); }
+.rev-sub { font-size:0.74rem; color:var(--muted); margin-top:2px; }
+
+/* ── FAQ ── */
+.faq-wrap { max-width:720px; display:flex; flex-direction:column; gap:4px; }
+.faq-item { border:1px solid var(--light); border-radius:8px; overflow:hidden; background:var(--bg2); }
+.faq-q {
+  width:100%; background:none; border:none;
+  font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600;
+  color:var(--navy); text-align:left; padding:18px 22px;
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  cursor:pointer; transition:background 0.15s;
+}
+.faq-q:hover { background:rgba(184,146,74,0.04); }
+.faq-plus { color:var(--gold); font-size:1.3rem; font-weight:300; flex-shrink:0; transition:transform 0.3s; }
+.faq-item.open .faq-plus { transform:rotate(45deg); }
+.faq-ans { max-height:0; overflow:hidden; transition:max-height 0.38s ease; }
+.faq-item.open .faq-ans { max-height:300px; }
+.faq-ans-i { padding:0 22px 18px; font-size:0.86rem; color:var(--muted); line-height:1.85; border-top:1px solid var(--light); padding-top:14px; }
+
+/* ── BLOG ── */
+.blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.blog-card {
+  background:var(--bg2); border:1px solid var(--light);
+  border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.25s;
+}
+.blog-card:hover { border-color:var(--gold2); transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+.blog-img {
+  height:130px;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  display:flex; align-items:center; justify-content:center; font-size:2.4rem;
+}
+.blog-body { padding:22px; }
+.blog-tag {
+  font-size:0.67rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+  color:var(--gold); background:rgba(184,146,74,0.1); padding:3px 10px; border-radius:20px;
+  display:inline-block; margin-bottom:10px;
+}
+.blog-title { font-size:0.93rem; font-weight:600; color:var(--navy); line-height:1.5; margin-bottom:8px; }
+.blog-exc { font-size:0.8rem; color:var(--muted); line-height:1.7; }
+.blog-foot {
+  padding:14px 22px; border-top:1px solid var(--light);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.blog-date { font-size:0.73rem; color:var(--muted); }
+.blog-read { font-size:0.73rem; color:var(--gold); font-weight:600; }
+
+/* ── CONTACT ── */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+.contact-links { display:flex; flex-direction:column; gap:12px; margin-top:32px; }
+.contact-link {
+  display:flex; align-items:center; gap:16px;
+  padding:18px 22px; background:var(--bg2); border:1px solid var(--light);
+  border-radius:10px; text-decoration:none; transition:all 0.22s;
+}
+.contact-link:hover { border-color:var(--gold2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+.cl-icon {
+  width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0;
+}
+.cl-title { font-size:0.88rem; font-weight:600; color:var(--navy); }
+.cl-sub { font-size:0.78rem; color:var(--muted); margin-top:2px; }
+
+.schedule {
+  margin-top:24px; padding:24px 26px;
+  background:var(--bg2); border:1px solid var(--light); border-radius:10px;
+}
+.sch-title { font-size:0.72rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.sch-row { display:flex; justify-content:space-between; font-size:0.84rem; padding:5px 0; border-bottom:1px solid var(--light); }
+.sch-row:last-child { border-bottom:none; }
+.sch-day { color:var(--muted); }
+.sch-time { color:var(--navy); font-weight:500; }
+
+.form-box { background:var(--bg2); border:1px solid var(--light); border-radius:12px; padding:36px; }
+.form-box h3 { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--navy); margin-bottom:6px; }
+.form-box p { font-size:0.84rem; color:var(--muted); margin-bottom:26px; line-height:1.7; }
+.fg { margin-bottom:14px; }
+.fg label { display:block; font-size:0.72rem; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); margin-bottom:7px; }
+.fg input,.fg select,.fg textarea {
+  width:100%; background:var(--bg); border:1.5px solid var(--light);
+  border-radius:6px; color:var(--text); font-family:'Inter',sans-serif;
+  font-size:0.88rem; padding:11px 14px; outline:none; transition:border-color 0.2s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--gold2); }
+.fg select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
+.fg textarea { resize:vertical; min-height:80px; }
+.form-wa {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; padding:14px; margin-top:6px;
+  background:#25d366; color:#fff;
+  border:none; border-radius:6px; font-family:'Inter',sans-serif;
+  font-size:0.88rem; font-weight:600; cursor:pointer;
+  text-decoration:none; transition:all 0.2s;
+}
+.form-wa:hover { background:#1db954; box-shadow:0 6px 18px rgba(37,211,102,0.3); }
+
+/* ── FOOTER ── */
 footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 20px;
+  background:var(--navy); border-top:1px solid rgba(184,146,74,0.15);
+  padding:36px 72px; display:flex; justify-content:space-between; align-items:center;
+}
+.f-logo { font-family:'Playfair Display',serif; color:var(--gold2); font-size:1rem; }
+.f-links { display:flex; gap:24px; list-style:none; }
+.f-links button { background:none; border:none; font-size:0.78rem; color:rgba(255,255,255,0.45); cursor:pointer; transition:color 0.2s; font-family:'Inter',sans-serif; }
+.f-links button:hover { color:var(--gold2); }
+.f-copy { font-size:0.73rem; color:rgba(255,255,255,0.3); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px) {
+  nav { padding:0 20px; }
+  .nav-tabs { display:none; }
+  .burger { display:flex; }
+  #sec-home { grid-template-columns:1fr; padding:60px 28px; text-align:center; }
+  .hero-card { display:none; }
+  .hero-btns { justify-content:center; }
+  .hero-stats { justify-content:center; gap:28px; flex-wrap:wrap; }
+  .sec { padding:60px 28px; }
+  .about-grid,.contact-grid { grid-template-columns:1fr; gap:40px; }
+  .achieve-grid { grid-template-columns:1fr 1fr; }
+  .steps { grid-template-columns:1fr 1fr; gap:20px; }
+  .steps::before { display:none; }
+  .rev-grid,.blog-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  footer { flex-direction:column; gap:16px; text-align:center; padding:28px 24px; }
+  .f-links { flex-wrap:wrap; justify-content:center; }
+}
+@media(max-width:600px) {
+  .achieve-grid { grid-template-columns:1fr; }
+  .steps { grid-template-columns:1fr; }
+  .hero-stats { gap:20px; }
+  .modal { padding:32px 24px 28px; }
 }
 </style>
 </head>
-
 <body>
 
-<header>
+<!-- NAV -->
 <nav>
-<a href="#about">Обо мне</a>
-<a href="#services">Услуги</a>
-<a href="#reviews">Отзывы</a>
-<a href="#faq">FAQ</a>
-<a href="#contacts">Контакты</a>
+  <div class="nav-logo">Дуйсембаев А. М.</div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showTab('home',this)">Главная</button>
+    <button class="nav-tab" onclick="showTab('about',this)">Обо мне</button>
+    <button class="nav-tab" onclick="showTab('services',this)">Услуги</button>
+    <button class="nav-tab" onclick="showTab('how',this)">Как это работает</button>
+    <button class="nav-tab" onclick="showTab('reviews',this)">Отзывы</button>
+    <button class="nav-tab" onclick="showTab('faq',this)">FAQ</button>
+    <button class="nav-tab" onclick="showTab('blog',this)">Блог</button>
+    <button class="nav-tab" onclick="showTab('contact',this)">Контакты</button>
+  </div>
+  <button class="nav-cta" onclick="openWA('Здравствуйте! Хочу записаться на приём.')">Записаться</button>
+  <button class="burger" id="burger" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-</header>
 
-<section class="hero">
-<h1>Дуйсембаев Алимжан Мустаевич</h1>
-<p>Травматолог-ортопед высшей категории</p>
-<button onclick="scrollToSection('contacts')">Записаться</button>
-</section>
-
-<section id="about">
-<h2>Обо мне</h2>
-<div class="card">
-<p>Опыт более 10 лет. Лечение травм и заболеваний опорно-двигательного аппарата.</p>
-</div>
-</section>
-
-<section id="services">
-<h2>Услуги</h2>
-<div class="card">Консультация</div>
-<div class="card">Лечение травм</div>
-<div class="card">Операции</div>
-</section>
-
-<section id="reviews">
-<h2>Отзывы</h2>
-<div class="card">Очень хороший врач!</div>
-</section>
-
-<section id="faq">
-<h2>FAQ</h2>
-<div class="card">Нужна ли запись? — Да</div>
-</section>
-
-<section id="contacts">
-<h2>Контакты</h2>
-
-<div class="card">
-<p><b>Телефон / WhatsApp:</b></p>
-<p style="font-size:20px;">+7 (776) 117-88-81</p>
-
-<button onclick="window.location.href='https://wa.me/77761178881'">
-Написать в WhatsApp
-</button>
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <button class="drawer-tab active" onclick="showTab('home',this,true)">Главная</button>
+  <button class="drawer-tab" onclick="showTab('about',this,true)">Обо мне</button>
+  <button class="drawer-tab" onclick="showTab('services',this,true)">Услуги</button>
+  <button class="drawer-tab" onclick="showTab('how',this,true)">Как это работает</button>
+  <button class="drawer-tab" onclick="showTab('reviews',this,true)">Отзывы</button>
+  <button class="drawer-tab" onclick="showTab('faq',this,true)">FAQ</button>
+  <button class="drawer-tab" onclick="showTab('blog',this,true)">Блог</button>
+  <button class="drawer-tab" onclick="showTab('contact',this,true)">Контакты</button>
+  <button class="drawer-cta" onclick="openWA('Здравствуйте! Хочу записаться на приём.')">💬 Записаться через WhatsApp</button>
 </div>
 
+<!-- PAGE -->
+<div class="page">
+
+<!-- HOME -->
+<section class="tab-section active" id="sec-home">
+  <div>
+    <div class="hero-eyebrow">Высшая категория · 10 лет опыта</div>
+    <h1 class="hero-name">Дуйсембаев<br><span>Алимжан</span><br>Мустаевич</h1>
+    <p class="hero-spec">Врач травматолог-ортопед высшей категории</p>
+    <p class="hero-desc">Диагностика и лечение заболеваний опорно-двигательного аппарата. Современные методы восстановительного лечения и хирургии. Индивидуальный подход к каждому пациенту.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="openWA('Здравствуйте! Хочу записаться на приём.')">Записаться на приём</button>
+      <button class="btn-ghost" onclick="showTab('services',null)">Услуги и цены</button>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-n">10+</span><span class="stat-l">Лет практики</span></div>
+      <div><span class="stat-n">1500+</span><span class="stat-l">Пациентов</span></div>
+      <div><span class="stat-n">500+</span><span class="stat-l">Операций</span></div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hero-card-inner">
+      <div class="hc-avatar">🦴</div>
+      <div class="hc-name">Дуйсембаев А. М.</div>
+      <div class="hc-role">Травматолог-ортопед · Высшая категория</div>
+      <div class="hc-tags">
+        <span class="hc-tag">Артроскопия</span>
+        <span class="hc-tag">Остеосинтез</span>
+        <span class="hc-tag">Реабилитация</span>
+        <span class="hc-tag">Эндопротезирование</span>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ABOUT -->
+<section class="tab-section sec sec-alt" id="sec-about">
+  <div class="about-grid">
+    <div>
+      <div class="sec-label">Обо мне</div>
+      <h2 class="sec-title">Более 10 лет опыта в травматологии</h2>
+      <div class="about-text">
+        <p>Врач травматолог-ортопед высшей квалификационной категории. Специализируюсь на диагностике и лечении травм и заболеваний опорно-двигательного аппарата — от острых травм до сложных ортопедических патологий.</p>
+        <p>Владею современными методами консервативного и оперативного лечения, в том числе артроскопическими техниками и малоинвазивными методами остеосинтеза.</p>
+        <div class="about-quote">
+          <p>«Моя цель — не просто вылечить, а вернуть человека к полноценной, активной жизни без боли»</p>
+        </div>
+        <p>Регулярно провожу сложные операции на суставах, костях и мягких тканях, добиваясь оптимальных результатов даже в нестандартных клинических случаях.</p>
+      </div>
+      <div style="margin-top:32px;">
+        <button class="btn-gold" onclick="openWA('Здравствуйте! Хочу записаться на консультацию.')">Записаться на консультацию</button>
+      </div>
+    </div>
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="achieve-icon">🏆</div>
+        <div class="achieve-title">Высшая категория</div>
+        <div class="achieve-desc">Подтверждённая высшая квалификационная категория по травматологии и ортопедии</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">🔬</div>
+        <div class="achieve-title">Современные методы</div>
+        <div class="achieve-desc">Артроскопия, малоинвазивный остеосинтез, эндопротезирование суставов</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">📚</div>
+        <div class="achieve-title">Постоянное развитие</div>
+        <div class="achieve-desc">Участник международных конгрессов и специализированных мастер-классов</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">🏥</div>
+        <div class="achieve-title">Клинический опыт</div>
+        <div class="achieve-desc">Более 500 операций, включая сложные случаи политравмы и ревизионной хирургии</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="tab-section sec" id="sec-services">
+  <div class="sec-label">Услуги</div>
+  <h2 class="sec-title">Направления работы</h2>
+  <p class="sec-sub">Комплексная помощь пациентам с травмами и заболеваниями опорно-двигательного аппарата</p>
+
+  <div class="svc-list">
+    <div class="svc-row" onclick="openModal('m1')">
+      <div class="svc-l">
+        <div class="svc-ico">👨‍⚕️</div>
+        <div>
+          <div class="svc-name">Консультация и диагностика</div>
+          <div class="svc-chips"><span class="svc-chip">Первичный приём</span><span class="svc-chip">Повторный приём</span><span class="svc-chip">Рентген / УЗИ</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m2')">
+      <div class="svc-l">
+        <div class="svc-ico">🩻</div>
+        <div>
+          <div class="svc-name">Лечение травм</div>
+          <div class="svc-chips"><span class="svc-chip">Переломы</span><span class="svc-chip">Ушибы / Растяжения</span><span class="svc-chip">Вывихи</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m3')">
+      <div class="svc-l">
+        <div class="svc-ico">🦵</div>
+        <div>
+          <div class="svc-name">Манипуляции и процедуры</div>
+          <div class="svc-chips"><span class="svc-chip">Гипс</span><span class="svc-chip">Перевязки</span><span class="svc-chip">Иммобилизация</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m4')">
+      <div class="svc-l">
+        <div class="svc-ico">💉</div>
+        <div>
+          <div class="svc-name">Пункции и блокады</div>
+          <div class="svc-chips"><span class="svc-chip">Пункция суставов</span><span class="svc-chip">Инъекции</span><span class="svc-chip">Блокады</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m5')">
+      <div class="svc-l">
+        <div class="svc-ico">🦿</div>
+        <div>
+          <div class="svc-name">Вправления</div>
+          <div class="svc-chips"><span class="svc-chip">Вывихи</span><span class="svc-chip">Репозиция отломков</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m6')">
+      <div class="svc-l">
+        <div class="svc-ico">🧬</div>
+        <div>
+          <div class="svc-name">Малые хирургические вмешательства</div>
+          <div class="svc-chips"><span class="svc-chip">Гематомы</span><span class="svc-chip">Гигромы / Липомы</span><span class="svc-chip">Металлоконструкции</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+    <div class="svc-row" onclick="openModal('m7')">
+      <div class="svc-l">
+        <div class="svc-ico">🧘</div>
+        <div>
+          <div class="svc-name">Реабилитация</div>
+          <div class="svc-chips"><span class="svc-chip">ЛФК</span><span class="svc-chip">Тейпирование</span><span class="svc-chip">Восстановление</span></div>
+        </div>
+      </div>
+      <div class="svc-r"><div class="svc-price">от 10 000 ₸</div><div class="svc-arr">→</div></div>
+    </div>
+  </div>
+
+  <div class="why-box">
+    <div class="why-box-title">⭐ Почему выбирают нас</div>
+    <div class="why-grid">
+      <div class="why-item">Опытный специалист высшей категории</div>
+      <div class="why-item">Быстрая диагностика</div>
+      <div class="why-item">Современные методы лечения</div>
+      <div class="why-item">Индивидуальный подход к каждому</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="tab-section sec sec-alt" id="sec-how">
+  <div class="sec-label">Процесс</div>
+  <h2 class="sec-title">Простой путь к лечению</h2>
+  <p class="sec-sub">Четыре шага от первого обращения до полного выздоровления</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">01</div>
+      <div class="step-title">Запись</div>
+      <div class="step-desc">Свяжитесь через WhatsApp. Выберите удобное время приёма.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">02</div>
+      <div class="step-title">Консультация</div>
+      <div class="step-desc">Полный осмотр, разбор жалоб, изучение снимков, постановка диагноза.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">03</div>
+      <div class="step-title">План лечения</div>
+      <div class="step-desc">Индивидуальная стратегия — консервативное лечение или хирургия с разъяснениями.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">04</div>
+      <div class="step-title">Восстановление</div>
+      <div class="step-desc">Контроль динамики, реабилитация и поддержка до полного выздоровления.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="tab-section sec" id="sec-reviews">
+  <div class="sec-label">Отзывы</div>
+  <h2 class="sec-title">Что говорят пациенты</h2>
+  <p class="sec-sub">Реальные истории людей, которым удалось вернуться к полноценной жизни</p>
+  <div class="rev-grid">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">«После операции на мениске прошёл через многих врачей. Алимжан Мустаевич сразу поставил правильный диагноз и провёл артроскопию. Через месяц уже бегал. Безмерно благодарен!»</p>
+      <div class="rev-author">
+        <div class="rev-av">А</div>
+        <div><div class="rev-name">Арман Б.</div><div class="rev-sub">Травма коленного сустава</div></div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">«Перелом шейки бедра — страшный диагноз. Доктор провёл операцию мастерски, объяснил каждый шаг. Сейчас мама ходит самостоятельно. Спасибо огромное!»</p>
+      <div class="rev-author">
+        <div class="rev-av">Г</div>
+        <div><div class="rev-name">Гульнара С.</div><div class="rev-sub">Перелом бедра (дочь пациентки)</div></div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">«Долго мучился с болями в плечевом суставе. Алимжан Мустаевич назначил курс PRP-терапии, и через 3 месяца боль полностью прошла. Всем рекомендую!»</p>
+      <div class="rev-author">
+        <div class="rev-av">Д</div>
+        <div><div class="rev-name">Дулат Н.</div><div class="rev-sub">Плечелопаточный периартрит</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="tab-section sec sec-alt" id="sec-faq">
+  <div class="sec-label">FAQ</div>
+  <h2 class="sec-title">Частые вопросы</h2>
+  <p class="sec-sub">Ответы на вопросы, которые чаще всего задают пациенты</p>
+  <div class="faq-wrap">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Нужна ли предварительная запись на приём?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Да, рекомендую записываться заранее через WhatsApp, чтобы гарантировать удобное для вас время. Запись позволяет подготовить всё необходимое и избежать ожидания.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Какие снимки и документы взять на первый приём?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Возьмите все рентгенограммы, МРТ/КТ снимки (желательно на диске), результаты анализов и выписки из предыдущих мест лечения. Чем больше информации — тем точнее диагностика.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Можно ли получить консультацию онлайн?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Да, провожу онлайн-консультации через WhatsApp или видеозвонок. Для этого нужно заранее отправить снимки и описание жалоб. Подходит для пациентов из других городов и для контрольных осмотров.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Как скоро можно ждать ответа в WhatsApp?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Стараюсь отвечать в течение нескольких часов в рабочее время. Если вопрос срочный — укажите это в сообщении. Ответ гарантирован в течение 24 часов.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Как понять — нужна ли мне операция?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Решение принимается только после полного обследования. В большинстве случаев начинаем с консервативного лечения. Хирургия — крайнее и взвешенное решение, когда другие методы неэффективны.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Сколько длится восстановление после операции?<span class="faq-plus">+</span></button>
+      <div class="faq-ans"><div class="faq-ans-i">Зависит от вида операции. После артроскопии — 4–8 недель. После остеосинтеза переломов — 3–6 месяцев. После эндопротезирования — 3–6 месяцев до полной активности. Индивидуальные сроки обсудим на консультации.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="tab-section sec" id="sec-blog">
+  <div class="sec-label">Блог</div>
+  <h2 class="sec-title">Полезные статьи</h2>
+  <p class="sec-sub">Делюсь знаниями о здоровье суставов, лечении травм и профилактике</p>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-img">🦵</div>
+      <div class="blog-body">
+        <div class="blog-tag">Суставы</div>
+        <div class="blog-title">Артроз коленного сустава: когда лечить, а когда оперировать?</div>
+        <div class="blog-exc">Разбираем стадии артроза, консервативные методы и показания к эндопротезированию.</div>
+      </div>
+      <div class="blog-foot"><span class="blog-date">Март 2025</span><span class="blog-read">Читать →</span></div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">⚡</div>
+      <div class="blog-body">
+        <div class="blog-tag">Травмы</div>
+        <div class="blog-title">Первая помощь при переломах: что делать до приезда скорой</div>
+        <div class="blog-exc">Пошаговые действия при подозрении на перелом — что можно и нельзя делать в первые минуты.</div>
+      </div>
+      <div class="blog-foot"><span class="blog-date">Февраль 2025</span><span class="blog-read">Читать →</span></div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">🏃</div>
+      <div class="blog-body">
+        <div class="blog-tag">Реабилитация</div>
+        <div class="blog-title">Как правильно восстанавливаться после артроскопии колена</div>
+        <div class="blog-exc">Полная программа реабилитации по неделям — упражнения, нагрузки, ограничения.</div>
+      </div>
+      <div class="blog-foot"><span class="blog-date">Январь 2025</span><span class="blog-read">Читать →</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="tab-section sec sec-alt" id="sec-contact">
+  <div class="sec-label">Контакты</div>
+  <h2 class="sec-title">Записаться на приём</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="sec-sub" style="margin-bottom:0;">Выберите удобный способ связи. Отвечаю в течение нескольких часов в рабочее время.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20приём." class="contact-link" target="_blank">
+          <div class="cl-icon">💬</div>
+          <div><div class="cl-title">WhatsApp</div><div class="cl-sub">+7 (776) 117-88-81 — быстрый ответ</div></div>
+        </a>
+      </div>
+      <div class="schedule">
+        <div class="sch-title">Режим работы</div>
+        <div class="sch-row"><span class="sch-day">Пн – Пт</span><span class="sch-time">09:00 – 18:00</span></div>
+        <div class="sch-row"><span class="sch-day">Суббота</span><span class="sch-time">10:00 – 14:00</span></div>
+        <div class="sch-row"><span class="sch-day">Воскресенье</span><span class="sch-time" style="color:var(--gold)">Выходной</span></div>
+      </div>
+    </div>
+    <div class="form-box">
+      <h3>Оставить заявку</h3>
+      <p>Заполните форму — я свяжусь с вами для подтверждения записи</p>
+      <div class="fg"><label>Ваше имя</label><input type="text" id="f-name" placeholder="Как к вам обращаться?"></div>
+      <div class="fg"><label>Телефон / WhatsApp</label><input type="tel" id="f-phone" placeholder="+7 _ _ _ _"></div>
+      <div class="fg">
+        <label>Повод обращения</label>
+        <select id="f-reason">
+          <option value="">Выберите...</option>
+          <option>Боль в суставе</option>
+          <option>Травма / перелом</option>
+          <option>Консультация по операции</option>
+          <option>Реабилитация</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="fg"><label>Описание проблемы</label><textarea id="f-note" placeholder="Опишите симптомы, как давно беспокоит, были ли снимки..."></textarea></div>
+      <button class="form-wa" onclick="sendForm()">💬 Отправить через WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
 <footer>
-© 2026 Дуйсембаев А.М.
+  <div class="f-logo">Дуйсембаев А. М.</div>
+  <ul class="f-links">
+    <li><button onclick="showTab('about',null)">Обо мне</button></li>
+    <li><button onclick="showTab('services',null)">Услуги</button></li>
+    <li><button onclick="showTab('reviews',null)">Отзывы</button></li>
+    <li><button onclick="showTab('faq',null)">FAQ</button></li>
+    <li><button onclick="showTab('contact',null)">Контакты</button></li>
+  </ul>
+  <div class="f-copy">© 2026 Дуйсембаев Алимжан Мустаевич</div>
 </footer>
 
-<script>
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({
-        behavior: 'smooth'
-    });
-}
-</script>
+<!-- OVERLAY -->
+<div class="overlay" id="ov" onclick="closeModal()"></div>
 
+<!-- MODALS -->
+<div class="modal" id="m1">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">👨‍⚕️</div>
+  <div class="m-title">Консультация и диагностика</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Первичный и повторный приём</li>
+    <li>Осмотр и постановка диагноза</li>
+    <li>Рентген, УЗИ, интерпретация снимков</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m2">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">🩻</div>
+  <div class="m-title">Лечение травм</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Переломы рёбер, конечностей</li>
+    <li>Ушибы, растяжения, разрывы связок</li>
+    <li>Вывихи и подвывихи</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20лечение%20травмы." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m3">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">🦵</div>
+  <div class="m-title">Манипуляции и процедуры</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Наложение и снятие гипса</li>
+    <li>Перевязки, обработка ран</li>
+    <li>Снятие швов</li>
+    <li>Иммобилизация (лонгета, повязки)</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20манипуляции." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m4">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">💉</div>
+  <div class="m-title">Пункции и блокады</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Пункция суставов</li>
+    <li>Внутрисуставные инъекции</li>
+    <li>Обезболивающие блокады</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20пункцию%20или%20блокаду." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m5">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">🦿</div>
+  <div class="m-title">Вправления</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Вправление вывихов</li>
+    <li>Репозиция костных отломков</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20вправление." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m6">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">🧬</div>
+  <div class="m-title">Малые хирургические вмешательства</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Вскрытие гематом</li>
+    <li>Удаление гигром, липом</li>
+    <li>Удаление металлоконструкций</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20малую%20операцию." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+<div class="modal" id="m7">
+  <button class="m-close" onclick="closeModal()">✕</button>
+  <div class="m-icon">🧘</div>
+  <div class="m-title">Реабилитация</div>
+  <div class="m-price">от 10 000 ₸</div>
+  <ul class="m-feats">
+    <li>Лечебная физкультура (ЛФК)</li>
+    <li>Тейпирование</li>
+    <li>Восстановление после травм</li>
+  </ul>
+  <a class="m-wa" href="https://wa.me/77761178881?text=Здравствуйте!%20Хочу%20записаться%20на%20реабилитацию." target="_blank">💬 Записаться через WhatsApp</a>
+</div>
+
+<script>
+const WA = '77761178881';
+
+function openWA(msg) {
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function showTab(id, btn, fromDrawer) {
+  // hide all sections
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  // update desktop nav
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const allDesktop = document.querySelectorAll('.nav-tab');
+  allDesktop.forEach(t => {
+    if (t.textContent.trim() === btn?.textContent?.trim()) t.classList.add('active');
+  });
+  // if from drawer, sync desktop too
+  if (fromDrawer) {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    // match by onclick attr
+    document.querySelectorAll('.nav-tab').forEach(t => {
+      if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+id+"'")) t.classList.add('active');
+    });
+    document.getElementById('drawer').classList.remove('open');
+  }
+  // sync drawer tabs
+  document.querySelectorAll('.drawer-tab').forEach(t => {
+    t.classList.remove('active');
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+id+"'")) t.classList.add('active');
+  });
+  // always sync desktop
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.remove('active');
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+id+"'")) t.classList.add('active');
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+}
+
+function openModal(id) {
+  document.getElementById('ov').classList.add('on');
+  document.getElementById(id).classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('ov').classList.remove('on');
+  document.querySelectorAll('.modal').forEach(m => m.classList.remove('on'));
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+
+function sendForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const reason = document.getElementById('f-reason').value;
+  const note = document.getElementById('f-note').value.trim();
+  let msg = 'Здравствуйте!';
+  if (name) msg += ' Меня зовут ' + name + '.';
+  if (phone) msg += ' Мой номер: ' + phone + '.';
+  if (reason) msg += ' Повод: ' + reason + '.';
+  if (note) msg += ' ' + note;
+  openWA(msg);
+}
+
+// Intersection observer for fade-in
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.achieve-card,.rev-card,.blog-card,.step,.svc-row').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(16px)';
+  el.style.transition='opacity 0.45s ease, transform 0.45s ease';
+  io.observe(el);
+});
+</script>
 </body>
 </html>
